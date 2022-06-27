@@ -6,14 +6,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    products: juegos
+    juegos: juegos
     
   },
   getters: {
-    getHeader: state=>{
+    getHeader: state => {
       let header
-      state.products.forEach(product => {
+      state.juegos.forEach(product => {
         header = Object.keys(product)
+        let colorIndex = header.indexOf('color')
+        header.splice(colorIndex, 1)
       });
       return header
     },

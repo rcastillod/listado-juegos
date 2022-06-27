@@ -1,8 +1,6 @@
 <template>
     <div class="container">
-        <h1>Listado de productos</h1>
-        <b-table striped hover :items="products"></b-table>
-
+        <h1>Listado de juegos</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -10,22 +8,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
+                <tr v-for="(juego, index) in juegos" :key="index">
+                    <td :style="{color: juego.color}">{{juego.codigo}}</td>
+                    <td :style="{color: juego.color}">{{juego.nombre}}</td>
+                    <td :style="{color: juego.color}">{{juego.stock}}</td>
+                    <td :style="{color: juego.color}">{{juego.precio}}</td>
                 </tr>
             </tbody>
         </table>
@@ -37,13 +24,13 @@
 import { mapState, mapGetters } from 'vuex'
 
 export default {
-    name: 'product-list',
+    name: 'juegos-list',
     // props: {},
     data: function(){
         return {}
     },
     computed: {
-        ...mapState(['products']),
+        ...mapState(['juegos']),
         ...mapGetters(['getHeader'])
     },
     //methods: {}

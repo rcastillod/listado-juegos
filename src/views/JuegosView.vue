@@ -1,14 +1,13 @@
 <template>
     <div>
-        <h1>Mis Productos</h1>
-        <product-list></product-list>
+        <juegos-list></juegos-list>
     </div>
 </template>
 
 <script>
-import ProductList from '@/components/products/ProductList.vue'
+import JuegosList from '@/components/juegos/JuegosList.vue'
 export default {
-    name: 'products-view',
+    name: 'juegos-view',
     // props: {},
     data: function(){
         return {}
@@ -17,7 +16,7 @@ export default {
     //methods: {}
     // watch: {},
     components: {
-        'product-list': ProductList
+        'juegos-list': JuegosList
     },
     // mixins: [],
     // filters: {},
