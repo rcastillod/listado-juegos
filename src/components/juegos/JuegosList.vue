@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <h1>Listado de juegos</h1>
+        <div>Total juegos disponibles: {{getJuegos}}</div>
         <table class="table">
             <thead>
                 <tr>
@@ -37,7 +38,8 @@ export default {
     computed: {
         ...mapState(['juegos']),
         ...mapGetters(['getHeader']),
-        ...mapGetters(['getColors'])
+        ...mapGetters(['getColors']),
+        ...mapGetters(['getJuegos']),
     },
     //methods: {}
     // watch: {},

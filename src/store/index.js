@@ -23,9 +23,17 @@ export default new Vuex.Store({
         return arr.indexOf(item) === index
       })
       return result
+    },
+    getJuegos: state => {
+      let stock = state.juegos.reduce((total, juego) => {
+        console.log(total, juego)
+        return total + parseInt(juego.stock)
+      },0)
+      return stock
     }
   },
   mutations: {
+
   },
   actions: {
   },
