@@ -12,8 +12,8 @@ export default new Vuex.Store({
   getters: {
     getHeader: state => {
       let header
-      state.juegos.forEach(product => {
-        header = Object.keys(product)
+      state.juegos.forEach(juego => {
+        header = Object.keys(juego)
         let colorIndex = header.indexOf('color')
         header.splice(colorIndex, 1)
       });
