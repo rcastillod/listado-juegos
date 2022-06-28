@@ -14,11 +14,16 @@ export default new Vuex.Store({
       let header
       state.juegos.forEach(juego => {
         header = Object.keys(juego)
-        let colorIndex = header.indexOf('color')
-        header.splice(colorIndex, 1)
       });
       return header
     },
+    getColors: state => {
+      let arr = state.juegos.map(juego => juego.color)
+      let result = arr.filter((item, index) => {
+        return arr.indexOf(item) === index
+      })
+      return result
+    }
   },
   mutations: {
   },

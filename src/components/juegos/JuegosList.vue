@@ -13,6 +13,11 @@
                     <td :style="{color: juego.color}">{{juego.nombre}}</td>
                     <td :style="{color: juego.color}">{{juego.stock}}</td>
                     <td :style="{color: juego.color}">{{juego.precio}}</td>
+                    <td :style="{color: juego.color}">
+                        <select>
+                            <option v-for="(color, index) in getColors" :key="index" :value="color" :selected="juego.color===color">{{color}}</option>
+                        </select>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -31,7 +36,8 @@ export default {
     },
     computed: {
         ...mapState(['juegos']),
-        ...mapGetters(['getHeader'])
+        ...mapGetters(['getHeader']),
+        ...mapGetters(['getColors'])
     },
     //methods: {}
     // watch: {},
