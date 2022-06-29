@@ -1,7 +1,6 @@
 <template>
     <div class="container">
-        <h1>Listado de juegos</h1>
-        <div>Total juegos disponibles: {{getJuegos}}</div>
+        <h1>Juegos disponibles</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -13,11 +12,15 @@
                     <td :style="{color: juego.color}">{{juego.codigo}}</td>
                     <td :style="{color: juego.color}">{{juego.nombre}}</td>
                     <td :style="{color: juego.color}">{{juego.stock}}</td>
-                    <td :style="{color: juego.color}">{{juego.precio}}</td>
-                    <td :style="{color: juego.color}">
-                        <select>
-                            <option v-for="(color, index) in getColors" :key="index" :value="color" :selected="juego.color===color">{{color}}</option>
+                    <td :style="{color: juego.color}">{{priceFormat}}</td>
+                    <td>
+                        <select @change="color(juego.codigo)">
+                            <option v-for="(color, index) in getColors" :key="index" :value="color" :selected="juego.color==color">{{color}}</option>
                         </select>
+                    </td>
+                    <td>
+                        <button @click="increase(juego.codigo)">+</button>
+                        <button @click="reduce(juego.codigo)">-</button>
                     </td>
                 </tr>
             </tbody>
@@ -26,8 +29,8 @@
 </template>
 
 <script>
-// MapHelper
-import { mapState, mapGetters } from 'vuex'
+
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
     name: 'juegos-list',
@@ -39,9 +42,22 @@ export default {
         ...mapState(['juegos']),
         ...mapGetters(['getHeader']),
         ...mapGetters(['getColors']),
-        ...mapGetters(['getJuegos']),
+        ...mapGetters(['priceFormat']),
     },
-    //methods: {}
+    methods: {
+        ...mapActions(['reduceJuegoACT']),
+        ...mapActions(['increaseJuegoACT']),
+        // color(e, id) {
+        //     let color = e.target.value
+        //     console.log(color, id)
+        // },
+        reduce(id) {
+            this.reduceJuegoACT(id)
+        },
+        increase(id) {
+            this.increaseJuegoACT(id)
+        }
+    }
     // watch: {},
     // components: {},
     // mixins: [],

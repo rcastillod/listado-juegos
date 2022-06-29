@@ -14,6 +14,7 @@ export default new Vuex.Store({
       let header
       state.juegos.forEach(juego => {
         header = Object.keys(juego)
+        header.push('acciones')
       });
       return header
     },
@@ -26,16 +27,35 @@ export default new Vuex.Store({
     },
     getJuegos: state => {
       let stock = state.juegos.reduce((total, juego) => {
-        console.log(total, juego)
         return total + parseInt(juego.stock)
       },0)
       return stock
+    },
+    priceFormat: state => {
+      let precio
+      state.juegos.forEach(juego => {
+        precio = parseInt(juego.precio).toLocaleString('es-CL')
+      })
+      return precio
     }
   },
   mutations: {
-
+    reduceStock: (state, id) => {
+      let index = state.juegos.findIndex(juego => juego.codigo == id )
+      state.juegos[index].stock--
+    },
+    increaseStock: (state, id) => {
+      let index = state.juegos.findIndex(juego => juego.codigo == id )
+      state.juegos[index].stock++
+    },
   },
   actions: {
+    reduceJuegoACT: ( {commit}, id ) => {
+      commit('reduceStock', id )
+    },
+    increaseJuegoACT: ( {commit}, id ) => {
+      commit('increaseStock', id )
+    }
   },
   modules: {
   }

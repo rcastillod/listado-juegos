@@ -1,11 +1,14 @@
 <template>
     <div>
         <juegos-list></juegos-list>
+        <juegos-total></juegos-total>
     </div>
 </template>
 
 <script>
+import JuegosTotal from '@/components/juegos/JuegosTotal.vue'
 import JuegosList from '@/components/juegos/JuegosList.vue'
+
 export default {
     name: 'juegos-view',
     // props: {},
@@ -16,7 +19,8 @@ export default {
     //methods: {}
     // watch: {},
     components: {
-        'juegos-list': JuegosList
+        'juegos-list': JuegosList,
+        'juegos-total': JuegosTotal
     },
     // mixins: [],
     // filters: {},
