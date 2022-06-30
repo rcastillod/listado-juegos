@@ -8,13 +8,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(juego, index) in juegos" :key="index">
-                    <td :style="{color: juego.color}">{{juego.codigo}}</td>
-                    <td :style="{color: juego.color}">{{juego.nombre}}</td>
-                    <td :style="{color: juego.color}">{{juego.stock}}</td>
-                    <td :style="{color: juego.color}">{{priceFormat}}</td>
+                <tr :style="{color: juego.color}" v-for="(juego, index) in juegos" :key="index">
+                    <td>{{juego.codigo}}</td>
+                    <td>{{juego.nombre}}</td>
+                    <td>{{juego.stock}}</td>
+                    <td>${{parseInt(juego.precio).toLocaleString('es-CL')}}</td>
                     <td>
-                        <select @change="color(juego.codigo)">
+                        <select @change="color(juego.codigo, $event.target.value)">
                             <option v-for="(color, index) in getColors" :key="index" :value="color" :selected="juego.color==color">{{color}}</option>
                         </select>
                     </td>
@@ -40,17 +40,16 @@ export default {
     },
     computed: {
         ...mapState(['juegos']),
-        ...mapGetters(['getHeader']),
-        ...mapGetters(['getColors']),
-        ...mapGetters(['priceFormat']),
+        ...mapGetters(['getHeader', 'getColors'])
     },
     methods: {
         ...mapActions(['reduceJuegoACT']),
         ...mapActions(['increaseJuegoACT']),
-        // color(e, id) {
-        //     let color = e.target.value
-        //     console.log(color, id)
-        // },
+        ...mapActions(['changeColorACT']),
+        color(index, value) {
+            let payload = {'id': index, 'color': value}
+            this.changeColorACT(payload)
+        },
         reduce(id) {
             this.reduceJuegoACT(id)
         },

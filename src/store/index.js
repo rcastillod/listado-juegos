@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import juegos from '@/assets/juegos.json'
+import juegos from './juegos.json'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    juegos: juegos
+    juegos
     
   },
   getters: {
@@ -31,13 +31,6 @@ export default new Vuex.Store({
       },0)
       return stock
     },
-    priceFormat: state => {
-      let precio
-      state.juegos.forEach(juego => {
-        precio = parseInt(juego.precio).toLocaleString('es-CL')
-      })
-      return precio
-    }
   },
   mutations: {
     reduceStock: (state, id) => {
@@ -48,6 +41,10 @@ export default new Vuex.Store({
       let index = state.juegos.findIndex(juego => juego.codigo == id )
       state.juegos[index].stock++
     },
+    changeColor: (state, payload) => {
+      let index = state.juegos.findIndex(juego => juego.codigo == payload.id)
+      state.juegos[index].color = payload.color
+    }
   },
   actions: {
     reduceJuegoACT: ( {commit}, id ) => {
@@ -55,6 +52,9 @@ export default new Vuex.Store({
     },
     increaseJuegoACT: ( {commit}, id ) => {
       commit('increaseStock', id )
+    },
+    changeColorACT: ( {commit}, payload ) => {
+      commit('changeColor', payload)
     }
   },
   modules: {
